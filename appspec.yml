@@ -1,9 +1,9 @@
 version: 0.0
 Resources:
-  - HelloWorld:
+  - pipeline-test:
       Type: AWS::Lambda::Function
       Properties:
-        Name: "HelloWorld"
+        Name: "pipeline-test"
         Alias: "dev"
         CurrentVersion: "{{CurrentVersion}}"
         TargetVersion: "{{TargetVersion}}"
