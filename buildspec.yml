@@ -3,12 +3,12 @@ version: 0.2
 phases:
   build:
     commands:
-      - CurrentVersion=$(echo $(aws lambda get-alias --function-name pipeline-test-lambda --name dev | grep FunctionVersion | tail -1 |tr -cd "[0-9]"))
+      - CurrentVersion=$(echo $(aws lambda get-alias --function-name pipeline-test --name dev | grep FunctionVersion | tail -1 |tr -cd "[0-9]"))
   post_build:
     commands:
       - ls
-      - aws lambda publish-version --function-name pipeline-test-lambda
-      - TargetVersion=$(echo $(aws lambda list-versions-by-function --function-name pipeline-test-lambda | grep Version | tail -1 | tr -cd "[0-9]"))
+      - aws lambda publish-version --function-name pipeline-test
+      - TargetVersion=$(echo $(aws lambda list-versions-by-function --function-name pipeline-test | grep Version | tail -1 | tr -cd "[0-9]"))
       - echo $CurrentVersion
       - echo $TargetVersion
       - sed -i -e "s/{{CurrentVersion}}/$CurrentVersion/g" appspec.yml
